@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_one :store
   has_one :store, :through          => :store_admins
 
-  has_many :transactions
+  has_many :transactions, foreign_key: "buyer_id"
 
   has_many :watched_items
   has_many :items, :through         => :watched_items
