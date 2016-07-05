@@ -4,7 +4,7 @@ class CreateTables < ActiveRecord::Migration[5.0]
       t.integer     :name,              null: false
       t.text        :description,       null: false
       t.integer     :price_in_cents,    null: false
-      t.integer     :store_id           null: false
+      t.integer     :store_id,           null: false
 
       t.timestamps
     end
@@ -21,7 +21,7 @@ class CreateTables < ActiveRecord::Migration[5.0]
       t.integer     :store_id,  null: false
       t.integer     :item_id,   null: false
       t.integer     :price_in_cents,     null: false
-      t.integer     :quantity_purchased null: false
+      t.integer     :quantity_purchased, null: false
       t.integer     :buyer_id,  null: false
 
       t.timestamps
@@ -45,4 +45,5 @@ class CreateTables < ActiveRecord::Migration[5.0]
 
     add_column :users, :admin,  :boolean
 
+  end
 end

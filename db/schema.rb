@@ -10,10 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705182022) do
+ActiveRecord::Schema.define(version: 20160705190452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "inventory", force: :cascade do |t|
+    t.integer  "store_id",   null: false
+    t.integer  "item_id",    null: false
+    t.integer  "quantity",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer  "name",           null: false
+    t.text     "description",    null: false
+    t.integer  "price_in_cents", null: false
+    t.integer  "store_id",       null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "store_admins", force: :cascade do |t|
+    t.integer "store_id", null: false
+    t.integer "user_id",  null: false
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "name",        null: false
+    t.text   "description", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "store_id",           null: false
+    t.integer  "item_id",            null: false
+    t.integer  "price_in_cents",     null: false
+    t.integer  "quantity_purchased", null: false
+    t.integer  "buyer_id",           null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -28,8 +65,15 @@ ActiveRecord::Schema.define(version: 20160705182022) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.boolean  "admin"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "watched_items", force: :cascade do |t|
+    t.integer "item_id",        null: false
+    t.integer "user_id",        null: false
+    t.integer "price_in_cents", null: false
   end
 
 end
