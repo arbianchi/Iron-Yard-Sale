@@ -65,3 +65,4 @@ group :development, :test do
 end
 
 gem 'httparty'
+gem 'smarter_csv'
