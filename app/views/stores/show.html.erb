@@ -1,0 +1,42 @@
+
+
+<%= link_to "Back", root_path, class: "btn btn-default" %>
+
+<div class='jumbotron'>
+
+  <h2><%= @store.name %></h2>
+
+  <table class="table table-hover table-striped table-condensed">
+    <thead>
+      <tr text-align=center>
+        <th>Item</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @item.each do |item| %>
+        <tr class='entry' > 
+          <td><%= item.name %></td>
+          <td><%= item.description%></td>
+          <td><%= item.price %></td>
+          <td> <%= link_to 'Buy', new_transaction_path(item), class: "btn btn-default btn-primary"  %>
+              <%= link_to 'Watch', ?_path, class: "btn btn-default btn-primary" %>
+            <% end %>
+          </td>
+          <td>  <% if current_user.admin?%>
+              <%= link_to 'Edit', edit_item(item), class: "btn btn-default btn-primary"  %>
+              <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
+            <% end %>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+
+
+  </table>
+</div>
