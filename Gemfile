@@ -54,6 +54,7 @@ gem 'bootstrap_form'
 gem 'quiet_assets'
 group :development, :test do
   gem 'rspec-rails', '~> 3.4'
+  gem 'capybara'
   gem 'rails-erd'
   gem 'pry-rails'
   gem 'better_errors'
