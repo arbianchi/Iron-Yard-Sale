@@ -4,14 +4,16 @@ Rails.application.routes.draw do
   root 'stores#index'
 
   resources :stores do
-    resources :items
+    resources :items do
+      post'items/watch' => 'items#watch' 
+    end
   end
 
- resources :transactions
- resources :inventory
+  get 'items/watched' => 'items#watched'
 
+  resources :transactions
+  resources :inventory
 
-post 'items/watched' => 'items#watch'
 end
 
 

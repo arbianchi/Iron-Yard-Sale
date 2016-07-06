@@ -2,11 +2,11 @@ class StoresController < ApplicationController
 
   def index
     @stores = Store.all
-    # authorize @stores
   end
 
   def show
     @store = Store.find(params[:id])
+    @items = Item.all
   end
 
   def new

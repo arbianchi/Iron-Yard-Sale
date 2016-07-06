@@ -1,7 +1,3 @@
-
-
-<%= link_to "Back", root_path, class: "btn btn-default" %>
-
 <div class='jumbotron'>
 
   <h2><%= @store.name %></h2>
@@ -18,25 +14,25 @@
     </thead>
 
     <tbody>
-      <% @item.each do |item| %>
+      <% @items.each do |item| %>
         <tr class='entry' > 
           <td><%= item.name %></td>
           <td><%= item.description%></td>
-          <td><%= item.price %></td>
+          <td><%= "$#{item.price}" %></td>
           <td> <%= link_to 'Buy', new_transaction_path(item), class: "btn btn-default btn-primary"  %>
-              <%= link_to 'Watch', new_watcheditem_path, class: "btn btn-default btn-primary" %>
-            <% end %>
-          </td>
-          <td>  <% if current_user.admin?%>
-              <%= link_to 'Edit', edit_item(item), class: "btn btn-default btn-primary"  %>
-              <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
-            <% end %>
-          </td>
+            <%# <%= link_to 'Watch', new_watcheditem_path, class: "btn btn-default btn-primary" %1> %>
+          <% end %>
+        </td>
+        <td>  <% if current_user.admin?%>
+            <%= link_to 'Edit', edit_item(item), class: "btn btn-default btn-primary"  %>
+            <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
+          <% end %>
+        </td>
 
-        </tr>
-      <% end %>
-    </tbody>
+      </tr>
+  </tbody>
 
 
-  </table>
+</table>
+<%= link_to "Back", root_path, class: "btn btn-default" %>
 </div>
