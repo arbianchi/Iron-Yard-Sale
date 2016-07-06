@@ -24,7 +24,7 @@
           <td><%= item.description%></td>
           <td><%= item.price %></td>
           <td> <%= link_to 'Buy', new_transaction_path(item), class: "btn btn-default btn-primary"  %>
-              <%= link_to 'Watch', ?_path, class: "btn btn-default btn-primary" %>
+              <%= link_to 'Watch', new_watcheditem_path, class: "btn btn-default btn-primary" %>
             <% end %>
           </td>
           <td>  <% if current_user.admin?%>
