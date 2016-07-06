@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :transactions
   resources :inventory
+  resources :charges
 
 end
 
