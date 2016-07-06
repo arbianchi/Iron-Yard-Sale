@@ -2,6 +2,12 @@
 
   <h2><%= @store.name %></h2>
 
+  <%= form_tag store_upload_path(@store.id), method: :post,:multipart => true do %>
+    <label for="file">Upload CSV</label>
+    <%= file_field_tag "file" %>
+    <%= submit_tag %>
+  <% end %>
+
   <table class="table table-hover table-striped table-condensed">
     <thead>
       <tr text-align=center>
@@ -15,7 +21,7 @@
 
     <tbody>
       <% @items.each do |item| %>
-        <tr class='entry' > 
+        <tr class='entry' >
           <td><%= item.name %></td>
           <td><%= item.description%></td>
           <td><%= "$#{item.price}" %></td>
