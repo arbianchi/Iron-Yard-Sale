@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
  resources :transactions
  resources :inventory
+
+
+post 'items/watched' => 'items#watch'
 end
 
 
