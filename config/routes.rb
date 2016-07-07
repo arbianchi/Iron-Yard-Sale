@@ -5,16 +5,16 @@ Rails.application.routes.draw do
 
   resources :stores do
     resources :items do
-      post'/watch' => 'items#watch' 
+      post'/watch' => 'items#watch'
     end
   end
 
   get '/watched' => 'items#watched'
 
   resources :transactions
-  resources :inventory
+
+  post '/stores/:id/inventories/upload' => 'inventories#upload', as: :inventories_upload
+
   resources :charges
 
 end
-
-
