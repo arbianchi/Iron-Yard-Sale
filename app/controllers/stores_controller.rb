@@ -46,6 +46,7 @@ class StoresController < ApplicationController
   end
 
   def destroy
+    @store = Store.find(params[:id])
     @store.destroy
     respond_to do |format|
       format.html { redirect_to stores_url, notice: 'store was successfully destroyed.' }
