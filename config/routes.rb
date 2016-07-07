@@ -7,13 +7,14 @@ Rails.application.routes.draw do
     resources :items do
       post'/watch' => 'items#watch'
     end
-    post '/upload' => 'stores#upload'
   end
 
   get '/watched' => 'items#watched'
 
   resources :transactions
-  resources :inventory
+
+  post '/stores/:id/inventories/upload' => 'inventories#upload', as: :inventories_upload
+
   resources :charges
 
 end

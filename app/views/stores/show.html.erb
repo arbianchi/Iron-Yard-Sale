@@ -2,7 +2,7 @@
 
   <h2><%= @store.name %></h2>
 
-  <%= form_tag store_upload_path(@store.id), method: :post,:multipart => true do %>
+  <%= form_tag inventories_upload_path(@store.id), method: :post,:multipart => true do %>
     <label for="file">Upload CSV</label>
     <%= file_field_tag "file" %>
     <%= submit_tag %>
