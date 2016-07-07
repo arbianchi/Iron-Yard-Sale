@@ -5,8 +5,9 @@ Rails.application.routes.draw do
 
   resources :stores do
     resources :items do
-      post'/watch' => 'items#watch' 
+      post'/watch' => 'items#watch'
     end
+    post '/upload' => 'stores#upload'
   end
 
   get '/watched' => 'items#watched'
@@ -16,5 +17,3 @@ Rails.application.routes.draw do
   resources :charges
 
 end
-
-
