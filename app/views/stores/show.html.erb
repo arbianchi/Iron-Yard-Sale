@@ -19,11 +19,11 @@
           <td><%= item.name %></td>
           <td><%= item.description%></td>
           <td><%= "$#{item.price}" %></td>
-          <td> <%= link_to 'Buy', new_transaction_path(item), class: "btn btn-default btn-primary"  %>
+          <td> <%= link_to 'Add to Shopping Cart', new_transaction_path(item), class: "btn btn-default btn-primary"  %>
             <%# <%= link_to 'Watch', new_watcheditem_path, class: "btn btn-default btn-primary" %1> %>
           <% end %>
         </td>
-        <td>  <% if current_user.admin?%>
+        <td>  <% if current_user#.admin?%>
             <%= link_to 'Edit', edit_item(item), class: "btn btn-default btn-primary"  %>
             <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
           <% end %>
