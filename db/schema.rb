@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707172322) do
+ActiveRecord::Schema.define(version: 20160707193818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,20 +32,26 @@ ActiveRecord::Schema.define(version: 20160707172322) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "store_admins", force: :cascade do |t|
+    t.integer "store_id", null: false
+    t.integer "user_id",  null: false
+  end
+
   create_table "stores", force: :cascade do |t|
-    t.string  "name",        null: false
-    t.text    "description", null: false
-    t.integer "admin_id",    null: false
+    t.string "name",        null: false
+    t.text   "description", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer  "store_id",           null: false
-    t.integer  "item_id",            null: false
-    t.integer  "price_in_cents",     null: false
-    t.integer  "quantity_purchased", null: false
-    t.integer  "buyer_id",           null: false
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "store_id",                           null: false
+    t.integer  "item_id",                            null: false
+    t.integer  "price_in_cents",                     null: false
+    t.integer  "quantity_purchased",                 null: false
+    t.integer  "buyer_id",                           null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.boolean  "completed",          default: false, null: false
+    t.boolean  "refunded",           default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|
