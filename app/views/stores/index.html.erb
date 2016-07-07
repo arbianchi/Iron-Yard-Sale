@@ -8,6 +8,9 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
+      <th>Store Admin Actions</th>
+      <th>Site Admin Actions</th>
+
     </tr>
   </thead>
   <tbody>
@@ -15,8 +18,19 @@
       <tr>
         <td><%= link_to store.name, store_path(store) %></td>
         <td><%= store.description %></td>
-      </td>
-    </tr>
-  <% end %>
-</tbody>
+
+        <%# <% if current_user.id == StoreAdmin.find(store.id).id  %1> %>
+          <td> <%= link_to 'Edit', edit_store_path(id: store.id), class: "btn btn-default btn-primary"  %>
+            <%= link_to 'Delete', store_path(store), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
+          </td>
+        <%# <% end %1> %>
+
+        <%# <% if current_user.admin? %1> %>
+          <td> <%= link_to 'Edit', edit_store_path(id: store.id), class: "btn btn-default btn-primary"  %>
+            <%= link_to 'Delete', store_path(store), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
+          </td>
+          <%# <% end %1> %>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

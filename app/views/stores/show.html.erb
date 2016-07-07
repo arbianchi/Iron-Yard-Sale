@@ -2,11 +2,6 @@
 
   <h2><%= @store.name %></h2>
 
-  <%= form_tag inventories_upload_path(@store.id), method: :post,:multipart => true do %>
-    <label for="file">Upload CSV</label>
-    <%= file_field_tag "file" %>
-    <%= submit_tag %>
-  <% end %>
 
   <table class="table table-hover table-striped table-condensed">
     <thead>
@@ -15,30 +10,37 @@
         <th>Description</th>
         <th>Price</th>
         <th></th>
-        <th></th>
+        <th>Admin Actions</th>
       </tr>
     </thead>
 
     <tbody>
-      <% @items.each do |item| %>
+      <% @items.where(store_id: @store.id).each do |item| %>
         <tr class='entry' >
+          binding.pry
           <td><%= item.name %></td>
           <td><%= item.description%></td>
           <td><%= "$#{item.price}" %></td>
           <td> <%= link_to 'Add to Shopping Cart', new_transaction_path(item), class: "btn btn-default btn-primary"  %>
-            <%# <%= link_to 'Watch', new_watcheditem_path, class: "btn btn-default btn-primary" %1> %>
+            <%= link_to 'Watch', '/watcheditempath', class: "btn btn-default btn-primary" %>
+          </td>
+          <td> <%= link_to 'Edit', edit_store_item_path(store_id: @store.id, id: item.id), class: "btn btn-default btn-primary"  %>
+            <%= link_to 'Delete', store_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
           <% end %>
         </td>
-        <td>  <% if current_user#.admin?%>
-            <%= link_to 'Edit', edit_item(item), class: "btn btn-default btn-primary"  %>
-            <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
-          <% end %>
-        </td>
-
       </tr>
-  </tbody>
-
-
-</table>
-<%= link_to "Back", root_path, class: "btn btn-default" %>
+    </tbody>
+  </table>
 </div>
+
+<div class='jumbotron'>
+
+  <%= form_tag inventories_upload_path(@store.id), method: :post,:multipart => true do %>
+    <label for="file">Upload Inventory CSV</label>
+    <%= file_field_tag "file" %>
+    <%= submit_tag %>
+  <% end %>
+</div>
+
+<%= link_to "Back", root_path, class: "btn btn-default" %>
+

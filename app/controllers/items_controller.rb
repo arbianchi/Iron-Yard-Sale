@@ -44,9 +44,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    @item = Item.find(params[:id])
     @item.destroy
     respond_to do |format|
-      format.html { redirect_to items_url, notice: 'item was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

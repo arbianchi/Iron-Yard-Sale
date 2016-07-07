@@ -7,6 +7,7 @@ class StoresController < ApplicationController
   def show
     @store = Store.find(params[:id])
     @items = Item.all
+    @store_admin = StoreAdmin.where(store_id: @store.id)
   end
 
   def new
@@ -29,6 +30,7 @@ class StoresController < ApplicationController
         format.json { render json: @store.errors, status: :unprocessable_entity }
       end
     end
+    @store_admin = StoreAdmin.create!(store_id: @store.id, user_id: params["store"][:user_id])
   end
 
   def update
@@ -44,6 +46,7 @@ class StoresController < ApplicationController
   end
 
   def destroy
+    @store = Store.find(params[:id])
     @store.destroy
     respond_to do |format|
       format.html { redirect_to stores_url, notice: 'store was successfully destroyed.' }
@@ -65,5 +68,10 @@ class StoresController < ApplicationController
   def store_params
     params.require(:store).permit(:name, :description)
   end
+
+  def store_admin_params
+    params.require(:store_admin).permit(:store_id, :user_id)
+  end
+
 
 end
