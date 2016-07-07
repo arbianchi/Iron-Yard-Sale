@@ -37,7 +37,7 @@
             </form>
           </td>
           <td>
-            <% 
+            <% @watched_items.each do |w|  
             <i class="fa fa-eye" aria-hidden="true" float="center"></i></td>
 
           <td> <%= link_to 'Edit', edit_store_item_path(store_id: @store.id, id: item.id), class: "btn btn-default btn-primary"  %>
