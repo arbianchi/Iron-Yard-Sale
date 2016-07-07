@@ -32,14 +32,10 @@ ActiveRecord::Schema.define(version: 20160707193818) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "store_admins", force: :cascade do |t|
-    t.integer "store_id", null: false
-    t.integer "user_id",  null: false
-  end
-
   create_table "stores", force: :cascade do |t|
-    t.string "name",        null: false
-    t.text   "description", null: false
+    t.string  "name",        null: false
+    t.text    "description", null: false
+    t.integer "admin_id",    null: false
   end
 
   create_table "transactions", force: :cascade do |t|

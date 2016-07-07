@@ -8,20 +8,13 @@ class WatchedItemsController < ApplicationController
   end
 
   def create
-    @watched_item = WatchedItem.new (approved_params)
+    @watched_item = WatchedItem.new(item_id: params[:item_id], user_id: params[:user_id], price_in_cents: (params[:price_in_cents].to_i * 100))
     if @watched_item.save
       flash[:notice] = "Item is being watched!"
-      redirect_to watched_path
+      redirect_to :back 
     else
       render :new
     end
   end
 
-  def show
-    @watchlist = Watchlist.find(user_id: current_user)
-  end
-  private
-  def approved_params
-    params.require(:watchlist).permit(:item_id,:price_in_cents,:user_id)
-  end
 end

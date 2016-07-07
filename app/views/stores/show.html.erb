@@ -10,6 +10,8 @@
         <th>Description</th>
         <th>Price</th>
         <th></th>
+        <th>Notify me if price falls below: </th>
+        <th>Watched</th>
         <th>Admin Actions</th>
       </tr>
     </thead>
@@ -17,13 +19,27 @@
     <tbody>
       <% @items.where(store_id: @store.id).each do |item| %>
         <tr class='entry' >
-          binding.pry
           <td><%= item.name %></td>
           <td><%= item.description%></td>
           <td><%= "$#{item.price}" %></td>
-          <td> <%= link_to 'Add to Shopping Cart', new_transaction_path(item), class: "btn btn-default btn-primary"  %>
-            <%= link_to 'Watch', '/watcheditempath', class: "btn btn-default btn-primary" %>
+          <td><%= link_to 'Add to Shopping Cart', new_transaction_path(item), class: "btn btn-default btn-primary"  %></td>
+
+          <td><%= form_tag  store_item_watched_items_path(item_id: item.id,user_id: current_user.id,store_id: @store.id), class:"form-inline"%>
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                <div class="input-group">
+                  <div class="input-group-addon">$</div>
+                  <input type="text" class="form-control" id="exampleInputAmount" name="price_in_cents" placeholder="Amount">
+                  <div class="input-group-addon">.00</div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Watch</button>
+            </form>
           </td>
+          <td>
+            <% 
+            <i class="fa fa-eye" aria-hidden="true" float="center"></i></td>
+
           <td> <%= link_to 'Edit', edit_store_item_path(store_id: @store.id, id: item.id), class: "btn btn-default btn-primary"  %>
             <%= link_to 'Delete', store_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
           <% end %>
