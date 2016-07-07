@@ -4,7 +4,7 @@
      <%= bootstrap_form_for @store, url: stores_path do |f| %>
        <%= f.text_field :name, label: "Name:" %>
        <%= f.text_field :description, label: "Description" %>
-       <%= f.hidden_field :user_id, value: current_user.id %>
+       <%= f.hidden_field :admin_id, value: current_user.id %>
        <button class="btn btn-primary btn-sm">Submit</button>
      <% end %>
    </body>
