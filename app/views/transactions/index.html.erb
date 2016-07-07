@@ -1,7 +1,7 @@
 
 <div class='jumbotron'>
 
-  <h2><%= current_user.email %></h2>
+  <h2><%= current_user.email %>'s Transactions</h2>
 
   <table class="table table-hover table-striped table-condensed">
     <thead>
@@ -15,20 +15,20 @@
     </thead>
 
     <tbody>
-      <% @items.each do |item| %>
+      <% @transactions.each do |t| %>
         <tr class='entry' > 
-          <td><%= item.name %></td>
-          <td><%= item.description%></td>
-          <td><%= "$#{item.price}" %></td>
+          <td><%= t.item_id.name %></td>
+          <td><%= t.item_id.description%></td>
+          <td><%= "$#{t.item_id.item.price}" %></td>
           <td> <%= link_to 'Buy', charges_path(item), class: "btn btn-default btn-primary"  %>
             <%# <%= link_to 'Watch', new_watcheditem_path, class: "btn btn-default btn-primary" %1> %>
           <% end %>
         </td>
-        <td>  <% if current_user#.admin?%>
-            <%= link_to 'Edit', edit_item(item), class: "btn btn-default btn-primary"  %>
-            <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
-          <% end %>
-        </td>
+        <%# <td>  <% if current_user.admin?%> %>
+        <%#     <%= link_to 'Edit', edit_item(item), class: "btn btn-default btn-primary"  %1> %>
+        <%#     <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %1> %>
+        <%#   <% end %1> %>
+        <%# </td> %>
 
       </tr>
   </tbody>

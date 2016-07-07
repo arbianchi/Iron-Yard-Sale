@@ -9,6 +9,7 @@
         <th>Item</th>
         <th>Description</th>
         <th>Price</th>
+        <th>Buy Now</th>
         <th></th>
         <th>Notify me if price falls below: </th>
         <th>Watched</th>
@@ -22,31 +23,50 @@
           <td><%= item.name %></td>
           <td><%= item.description%></td>
           <td><%= "$#{item.price}" %></td>
-          <td><%= link_to 'Add to Shopping Cart', new_transaction_path(item), class: "btn btn-default btn-primary"  %></td>
-
-          <td><%= form_tag  store_item_watched_items_path(item_id: item.id,user_id: current_user.id,store_id: @store.id), class:"form-inline"%>
-              <div class="form-group">
-                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-                <div class="input-group">
-                  <div class="input-group-addon">$</div>
-                  <input type="text" class="form-control" id="exampleInputAmount" name="price_in_cents" placeholder="Amount">
-                  <div class="input-group-addon">.00</div>
-                </div>
-              </div>
-              <button type="submit" class="btn btn-primary">Watch</button>
+          <td>
+            <form action="/charges" method="POST">
+              <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_iSj3eYtFd2Ul8cBLBNrKk5As"
+                data-amount="<%= item.price %>"
+                data-name="Iron Yard Sale"
+                data-description="<%= item.description%>"
+                data-image="https://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(current_user.email) %>"
+                data-locale="auto">
+              </script>
+              <input type="hidden" name="item" value="<%= item.id %>">
+              <input type="hidden" name="price" value="<%= item.price %>">
             </form>
           </td>
-          <td>
-            <% @watched_items.each do |w|  
-            <i class="fa fa-eye" aria-hidden="true" float="center"></i></td>
+          <td><%= link_to 'Add to Shopping Cart', transactions_path, class: "btn btn-default btn-primary"  %></td>
 
-          <td> <%= link_to 'Edit', edit_store_item_path(store_id: @store.id, id: item.id), class: "btn btn-default btn-primary"  %>
-            <%= link_to 'Delete', store_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
+          <td><%= form_tag  store_item_watched_items_path(item_id: item.id,user_id: current_user.id,store_id: @store.id), method: :post, class:"form-inline"%>
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+              <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input type="text" class="form-control" id="exampleInputAmount" name="price_in_cents" placeholder="Amount">
+                <div class="input-group-addon">.00</div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Watch</button>
+          </form>
+        </td>
+        <td>
+          <% @watched_items.each do |w| %> 
+            <% if w.item_id == item.id%>
+              <i class="fa fa-eye" aria-hidden="true" float="center"></i>
+            <% end %>
           <% end %>
         </td>
-      </tr>
-    </tbody>
-  </table>
+
+        <td> <%= link_to 'Edit', edit_store_item_path(store_id: @store.id, id: item.id), class: "btn btn-default btn-primary"  %>
+          <%= link_to 'Delete', store_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 </div>
 
 <div class='jumbotron'>

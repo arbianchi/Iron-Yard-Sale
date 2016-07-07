@@ -7,6 +7,7 @@ class StoresController < ApplicationController
   def show
     @store = Store.find(params[:id])
     @items = Item.all
+    @watched_items = WatchedItem.all
   end
 
   def new

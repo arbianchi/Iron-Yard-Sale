@@ -18,15 +18,15 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = Transaction.new(store_id: params[:store_id])
 
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @transaction, notice: 'transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
       else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        # format.html { render :new }
+        # format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
   end
