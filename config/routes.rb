@@ -5,11 +5,10 @@ Rails.application.routes.draw do
 
   resources :stores do
     resources :items do
-      post'/watch' => 'items#watch'
+      resources :watched_items
     end
   end
 
-  get '/watched' => 'items#watched'
 
   resources :transactions
 
