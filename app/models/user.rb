@@ -5,7 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :store
-  has_one :store, :through          => :store_admins
 
   has_many :transactions, foreign_key: "buyer_id"
 
