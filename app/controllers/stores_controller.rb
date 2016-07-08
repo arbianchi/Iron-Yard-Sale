@@ -37,6 +37,7 @@ class StoresController < ApplicationController
   end
 
   def update
+    @store = Store.find(params[:id])
     respond_to do |format|
       if @store.update(store_params)
         format.html { redirect_to @store, notice: 'store was successfully updated.' }
@@ -46,7 +47,6 @@ class StoresController < ApplicationController
         format.json { render json: @store.errors, status: :unprocessable_entity }
       end
     end
-    authorize @store
   end
 
   def destroy
