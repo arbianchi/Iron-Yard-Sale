@@ -23,7 +23,7 @@ class Item < ApplicationRecord
 
   def watches
     WatchedItem.where(item_id: self.id).
-      where(price_in_cents > self.price_in_cents).
+      where('price_in_cents > ?', self.price_in_cents).
       group_by { |h| h.user_id }.
       map { |h,v| v.max }
   end
