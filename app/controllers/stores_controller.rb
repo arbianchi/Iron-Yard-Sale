@@ -19,6 +19,7 @@ class StoresController < ApplicationController
 
   def edit
     @store = Store.find(params[:id])
+    authorize @store
   end
 
   def create
@@ -26,7 +27,7 @@ class StoresController < ApplicationController
 
     respond_to do |format|
       if @store.save
-        format.html { redirect_to @store, notice: 'Store was successfully created.' }
+        format.html { redirect_to @store, notice: 'Congratulations! You have opened your own store.' }
         format.json { render :show, status: :created, location: @store }
       else
         format.html { render :new }
@@ -45,13 +46,15 @@ class StoresController < ApplicationController
         format.json { render json: @store.errors, status: :unprocessable_entity }
       end
     end
+    authorize @store
   end
 
   def destroy
     @store = Store.find(params[:id])
+    authorize @store
     @store.destroy
     respond_to do |format|
-      format.html { redirect_to stores_url, notice: 'store was successfully destroyed.' }
+      format.html { redirect_to stores_url, notice: 'You have closed your store.' }
       format.json { head :no_content }
     end
   end

@@ -1,5 +1,6 @@
 class StorePolicy < ApplicationPolicy
 
+
   def show?
     true
   end
