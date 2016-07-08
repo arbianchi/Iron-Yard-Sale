@@ -2,6 +2,7 @@ class TransactionsController < ApplicationController
 
   def index
     @transactions = Transaction.all
+    @items = Item.all
     # authorize @transactions
   end
 
