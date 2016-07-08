@@ -16,13 +16,12 @@
     </thead>
 
     <tbody>
-      <% @inventory.where("quantity > ?", 0).where(store_id: @store.id).each do |i|%>
-        <% @items.where(store_id: @store.id).each do |item| %>
+        <% @items.each do |item| %>
           <tr class='entry' >
             <td><%= item.name %></td>
             <td><%= item.description%></td>
             <td><%= "#{item.price}" %></td>
-            <td><%= i.quantity%></td>
+            <td><%= item.quantity%></td>
             <td><%= link_to 'Add to Shopping Cart', transactions_path(store_id: @store.id, item_id: item.id, price_in_cents: item.price_in_cents, quantity_purchased: 1, buyer_id: current_user.id), method: :post, class: "btn btn-default btn-primary" %>
             </td>
 
@@ -37,7 +36,7 @@
               <% end %>
             </td>
             <td>
-              <% @watched_items.each do |w| %> 
+              <% @watched_items.each do |w| %>
                 <% if w.item_id == item.id%>
                   <i class="fa fa-eye" aria-hidden="true"></i>
                 <% end %>
@@ -48,7 +47,6 @@
                 <%= link_to 'Delete', store_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
               </td>
             <% end %>
-          <% end %>
         <% end %>
       </tr>
     </tbody>
