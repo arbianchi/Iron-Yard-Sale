@@ -32,9 +32,11 @@ class ItemsController < ApplicationController
   end
 
   def update
+    @item = Item.find(params[:id])
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'item was successfully updated.' }
+        binding.pry
+        format.html { redirect_to store_path(params[:store_id]), notice: 'item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }
@@ -61,6 +63,6 @@ class ItemsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def item_params
-    params.require(:item).permit(:store_id, :price_in_cents, :description)
+    params.require(:item).permit(:name, :store_id, :price_in_cents, :description)
   end
 end
