@@ -1,0 +1,7 @@
+
+<%= bootstrap_form_for @store, url: store_path do |f| %>
+  <%= f.text_field :name, label: "name" %>
+  <%= f.text_field :description, label: "Description" %>
+  <%= f.hidden_field :admin_id, value: params[:admin_id] %>
+  <button class="btn btn-primary btn-sm">Submit</button>
+<% end %>

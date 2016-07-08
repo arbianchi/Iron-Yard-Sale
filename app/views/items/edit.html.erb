@@ -1,0 +1,8 @@
+<%= bootstrap_form_for @item, url: store_item_path do |f| %>
+  <%= f.number_field :price_in_cents, step: 0.01, label: "Set Price:" %>
+  <%= f.text_field :name, label: "name" %>
+  <%= f.text_field :description, label: "Description" %>
+  <%= f.hidden_field :store_id, value: params[:store_id] %>
+  <%= f.hidden_field :id, value: params[:id] %>
+  <button class="btn btn-primary btn-sm">Submit</button>
+<% end %>
