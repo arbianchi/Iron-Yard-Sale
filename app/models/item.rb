@@ -9,6 +9,11 @@ class Item < ApplicationRecord
     "$#{(self.price_in_cents / 100)}.00"
   end
 
+  def quantity
+    Inventory.where(item_id: self.id).pluck(:quantity).sum -
+      Transaction.where(item_id: self.id).pluck(:quantity_purchased).sum
+  end
+
   after_update :notify_any_watchers
 
   def notify_any_watchers
