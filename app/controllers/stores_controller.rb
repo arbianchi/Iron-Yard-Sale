@@ -8,6 +8,8 @@ class StoresController < ApplicationController
     @store = Store.find(params[:id])
     @items = Item.all
     @watched_items = WatchedItem.all
+    @watched_item = WatchedItem.new
+    @inventory = Inventory.all
   end
 
   def new

@@ -1,7 +1,7 @@
 
 <div class='jumbotron'>
 
-  <h2><%= current_user.email %>'s Transactions</h2>
+  <h2><%= current_user.email %>'s Shopping Cart</h2>
 
   <table class="table table-hover table-striped table-condensed">
     <thead>
@@ -17,26 +17,33 @@
     <tbody>
       <% @transactions.each do |t| %>
         <tr class='entry' > 
-          <td><%= t.item_id.name %></td>
-          <td><%= t.item_id.description%></td>
-          <td><%= "$#{t.item_id.item.price}" %></td>
-          <td> <%= link_to 'Buy', charges_path(item), class: "btn btn-default btn-primary"  %>
-            <%# <%= link_to 'Watch', new_watcheditem_path, class: "btn btn-default btn-primary" %1> %>
-          <% end %>
-        </td>
-        <%# <td>  <% if current_user.admin?%> %>
-        <%#     <%= link_to 'Edit', edit_item(item), class: "btn btn-default btn-primary"  %1> %>
-        <%#     <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %1> %>
-        <%#   <% end %1> %>
-        <%# </td> %>
-
-      </tr>
-  </tbody>
-
-
-</table>
-<%= link_to "Back", root_path, class: "btn btn-default" %>
-</div>
+          <td><%= Item.find(t.item_id).name %></td>
+          <td><%= Item.find(t.item_id).description%></td>
+          <td><%= "$#{Item.find(t.item_id).price}" %></td>
+          <td>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="jumbotron">
+  <h2>Total: $<%= Transaction.pluck(:price_in_cents).sum / 100%></h2> 
+    <form action="/charges" method="POST">
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_iSj3eYtFd2Ul8cBLBNrKk5As"
+        data-amount="<%= Transaction.pluck(:price_in_cents).sum%>"
+        <%# data-name="<%= Item.find(t.item_id).name%>" %>
+        <%# data-description="<%= Item.find(t.item_id).description%>" %>
+        <%# data-image="https://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(current_user.email) %1>" %>
+        data-locale="auto">
+      </script>
+      <%# <input type="hidden" name="item" value="<%= t.item_id %1>"> %>
+      <input type="hidden" name="price" value="<%= Item.pluck(:price_in_cents).sum %>">
+    </form>
+  </div>
+    <%= link_to "Back", :back, class: "btn btn-default" %>
+  </div>
 
 
 
