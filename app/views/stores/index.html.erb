@@ -1,6 +1,5 @@
 <h2>Welcome to Iron Yard Sale!</h2>
 
-<%= link_to "Open a Store", new_store_path, class: "btn btn-default" %>
 
 <h2><font color="purple">Stores:</font></h2>
 <table class="table table-hover table-striped table-condensed">
@@ -23,5 +22,7 @@
         <% end %>
       </tr>
     <% end %>
+        <% if policy(@store).create? %>
+<%= link_to "Open a Store", new_store_path, class: "btn btn-default" %>
   </tbody>
 </table>
