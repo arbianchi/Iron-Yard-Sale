@@ -3,7 +3,6 @@ class InventoriesController < ApplicationController
   def upload
     hashes = SmarterCSV.process(params[:file].tempfile)
     hashes.each do |record|
-      binding.pry
       item = Item.create!(
         name:           record[:name],
         description:    record[:description],
