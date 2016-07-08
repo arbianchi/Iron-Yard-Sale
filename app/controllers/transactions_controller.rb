@@ -22,9 +22,10 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(store_id: params[:store_id], item_id: params[:item_id], price_in_cents: params[:price_in_cents], quantity_purchased: params[:quantity_purchased], buyer_id: params[:buyer_id] )
 
 
+
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to :back, notice: 'Item added to shopping cart!' }
+        format.html { redirect_to transactions_path, notice: 'Item added to shopping cart!' }
         format.json { render :show, status: :created, location: @transaction }
       else
         # format.html { render :new }
