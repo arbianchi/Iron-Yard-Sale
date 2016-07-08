@@ -12,8 +12,4 @@ class User < ApplicationRecord
   has_many :watched_items
   has_many :items, :through         => :watched_items
 
-  def is_store_admin? store
-    StoreAdmin.find_by(store_id: store.id, user_id: current_user.id)
-  end
-
 end

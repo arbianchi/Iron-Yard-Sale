@@ -15,6 +15,6 @@ class InventoriesController < ApplicationController
         quantity:   record[:quantity]
       )
     end
-    redirect_back
+    redirect_back :back
   end
 end
