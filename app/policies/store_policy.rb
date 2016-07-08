@@ -13,7 +13,7 @@ class StorePolicy < ApplicationPolicy
   end
 
   def update?
-    is_admin?
+    is_admin? || is_owner?
   end
 
   def destroy?
@@ -22,9 +22,13 @@ class StorePolicy < ApplicationPolicy
 
   private
 
+  def is_owner?
+    record.admin_id == user.id
+  end
+
   def is_admin?
     unless user.nil?
-      user.admin || (user.id == record.admin_id)
+      user.admin
     end
   end
 end
