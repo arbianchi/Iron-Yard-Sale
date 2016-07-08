@@ -17,25 +17,29 @@
     <tbody>
       <% @transactions.each do |t| %>
         <tr class='entry' > 
-          <td><%= t.item_id.name %></td>
-          <td><%= t.item_id.description%></td>
-          <td><%= "$#{t.item_id.item.price}" %></td>
-          <td> <%= link_to 'Buy', charges_path(item), class: "btn btn-default btn-primary"  %>
-            <%# <%= link_to 'Watch', new_watcheditem_path, class: "btn btn-default btn-primary" %1> %>
-          <% end %>
-        </td>
-        <%# <td>  <% if current_user.admin?%> %>
-        <%#     <%= link_to 'Edit', edit_item(item), class: "btn btn-default btn-primary"  %1> %>
-        <%#     <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %1> %>
-        <%#   <% end %1> %>
-        <%# </td> %>
-
-      </tr>
-  </tbody>
-
-
-</table>
-<%= link_to "Back", root_path, class: "btn btn-default" %>
+          <td><%= Item.find(t.item_id).name %></td>
+          <td><%= Item.find(t.item_id).description%></td>
+          <td><%= "$#{Item.find(t.item_id).price}" %></td>
+          <td>
+            <form action="/charges" method="POST">
+              <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_iSj3eYtFd2Ul8cBLBNrKk5As"
+                data-amount="<%= Item.find(t.item_id).price %>"
+                data-name="<%= Item.find(t.item_id).name%>"
+                data-description="<%= Item.find(t.item_id).description%>"
+                data-image="https://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(current_user.email) %>"
+                data-locale="auto">
+              </script>
+              <input type="hidden" name="item" value="<%= t.item_id %>">
+              <input type="hidden" name="price" value="<%= Item.find(t.item_id).price %>">
+            </form>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "Back", root_path, class: "btn btn-default" %>
 </div>
 
 
