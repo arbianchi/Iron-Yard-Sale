@@ -27,12 +27,12 @@ class ItemPolicy < ApplicationPolicy
   end
 
   def is_owner?
-    record.owner_id == user.id
+    record.admin_id == user.id
   end
 
   def is_admin?
     unless user.nil?
-      user.admin || (user.id == record.admin_id)
+      user.admin 
     end
   end
 end
