@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   belongs_to :user
 
   def price
-    self.price_in_cents / 100
+    "$#{(self.price_in_cents / 100)}.00"
   end
 
   after_update :notify_any_watchers
