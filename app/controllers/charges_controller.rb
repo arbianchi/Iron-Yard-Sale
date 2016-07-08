@@ -25,6 +25,7 @@ class ChargesController < ApplicationController
     )
 
     if charge.paid
+      @transactions = Transaction.all
       @transactions.where(buyer_id: current_user.id).each do |t|
         t.update(completed: true)
       end
