@@ -67,3 +67,4 @@ end
 
 gem 'httparty'
 gem 'smarter_csv'
+gem 'figaro'
