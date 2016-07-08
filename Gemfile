@@ -62,6 +62,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'letter_opener'
 end
 
 gem 'httparty'
