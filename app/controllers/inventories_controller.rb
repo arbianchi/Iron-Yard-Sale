@@ -21,6 +21,6 @@ class InventoriesController < ApplicationController
         quantity:   quantity
       )
     end
-    redirect_back
+    redirect_back :back
   end
 end

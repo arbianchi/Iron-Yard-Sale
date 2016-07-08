@@ -44,8 +44,9 @@
                 <% end %>
               <% end %>
             </td>
-
+            <% if policy(item).update? %>&emsp;
             <td> <%= link_to 'Edit', edit_store_item_path(store_id: @store.id, id: item.id), class: "btn btn-default btn-primary"  %>
+            <% end %>
               <%= link_to 'Delete', store_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-primary" %>
             </td>
           <% end %>
