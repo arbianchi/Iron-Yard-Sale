@@ -1,8 +1,8 @@
 class Item < ApplicationRecord
   belongs_to :store
-  belongs_to :transactions
+  belongs_to :purchase, class_name: "Transaction", foreign_key: "transaction_id"
   belongs_to :inventory
-  belongs_to :watched_items
+  belongs_to :watched_item
   belongs_to :user
 
   def price
