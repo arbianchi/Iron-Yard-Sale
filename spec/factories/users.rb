@@ -3,7 +3,7 @@ require 'pry'
 
 FactoryGirl.define do
   factory :user do
-    email       { Faker::Internet.email }
+    email       { Faker::Internet.safe_email }
     password    "password"
   end
 
