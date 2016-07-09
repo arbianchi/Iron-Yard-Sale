@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @stores.each do |store| %>
+    <% not @stores.empty? && @stores.each do |store| %>
       <tr>
         <td><%= link_to store.name, store_path(store) %></td>
         <td><%= store.description %></td>
@@ -21,8 +21,9 @@
           </td>
         <% end %>
       </tr>
-    <% end %>
-        <% if policy(@store).create? %>
-<%= link_to "Open a Store", new_store_path, class: "btn btn-default" %>
+        <% if policy(store).create? %>
+        <%= link_to "Open a Store", new_store_path, class: "btn btn-default" %>
+        <% end %>
+        <% end %>
   </tbody>
 </table>
