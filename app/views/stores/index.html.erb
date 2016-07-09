@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <% not @stores.empty? && @stores.each do |store| %>
+    <% @stores.present? && @stores.each do |store| %>
       <tr>
         <td><%= link_to store.name, store_path(store) %></td>
         <td><%= store.description %></td>
